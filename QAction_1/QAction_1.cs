@@ -31,7 +31,7 @@ namespace Skyline.Protocol
                     Simpletableupdatedate_1003 = DateTime.UtcNow.ToOADate(),
                 };
 
-                protocol.SetRow(Parameter.Simpletable.tablePid, key, row);
+                protocol.SetRow(Parameter.Simpletable.tablePid, key, row.ToObjectArray());
             }
 
             public static void RefreshInfo(SLProtocol protocol)
