@@ -44,7 +44,7 @@ Any inquiries can be addressed to:
 
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>SimpleTableExample</Name>
-	<Description>SimpleTableExample DataMiner connector</Description>
+	<Description>Simple Table Example DataMiner connector</Description>
 	<Version>1.0.0.1</Version>
 	<IntegrationID>DMS-DRV-7991</IntegrationID>
 	<Provider>AxDevBR</Provider>
@@ -53,7 +53,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>147</DeviceOID>
 	<ElementType>SimpleTable</ElementType>
 	<Type relativeTimers="true">virtual</Type>
-	<Display defaultPage="General" pageOrder="General"/>
+	<Display defaultPage="General" pageOrder="General" wideColumnPages="General"/>
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -67,11 +67,263 @@ Any inquiries can be addressed to:
 			<Description>After Startup</Description>
 			<Type>dummy</Type>
 		</Param>
+		<Param id="20">
+			<Name>AddRow</Name>
+			<Type>write</Type>
+			<Information>
+				<Subtext>Add a row in the table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Add Row</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="30" trending="false">
+			<Name>UpdateRow</Name>
+			<Description>Update Row</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Update a row in the table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="35" />
+			</Measurement>
+		</Param>
+		<Param id="130">
+			<Name>UpdateRow</Name>
+			<Description>Update Row</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="35" />
+			</Measurement>
+		</Param>
+		<Param id="35" trending="false" save="true">
+			<Name>UpdateRow_DiscreetList</Name>
+			<Description>Update Row Discreet List</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>Row Key...</DefaultValue>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1000">
+			<Name>SimpleTable</Name>
+			<Description>Simple Table</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="1001" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="1002" type="retrieved" options=";save" />
+				<ColumnOption idx="2" pid="1003" type="retrieved" options=";save" />
+				<ColumnOption idx="3" pid="1004" type="custom" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>A very simple table, just waiting to be updated.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3,width:100-124-124-100,sort:STRING-INT|DESC|1-INT|DESC|0-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="1001" trending="false">
+			<Name>SimpleTableId</Name>
+			<Description>Id (Simple Table)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1002" trending="false">
+			<Name>SimpleTableAddDate</Name>
+			<Description>Add Date (Simple Table)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Date when the row was added in the table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1003" trending="false">
+			<Name>SimpleTableUpdateDate</Name>
+			<Description>Update Date (Simple Table)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Date when the row was updated in the table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+				<Exceptions>
+					<Exception id="1" value="-1">
+						<Display state="disabled">Not Updated</Display>
+						<Value>-1</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1004">
+			<Name>SimpleTableDeleteRow</Name>
+			<Description>Delete Row (Simple Table)</Description>
+			<Message>Are you sure you want to delete this row?</Message>
+			<Type>write</Type>
+			<Information>
+				<Subtext>Delete a row from the table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Delete</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1050" trending="true" save="true">
+			<Name>RowCount</Name>
+			<Description>Row Count</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Number of rows in the table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Units>row(s)</Units>
+				<Range>
+					<Low>0</Low>
+					<High>1000000</High>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
 	</Params>
 
 	<QActions>
 		<QAction id="1" name="Precompiled Code" encoding="csharp" options="precompile" />
 		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
+		<QAction id="20" name="Add or Update Row" encoding="csharp" triggers="20;30" />
+		<QAction id="1004" name="Delete Row" encoding="csharp" triggers="1004" row="true" />
 	</QActions>
 
 	<Groups>
@@ -111,27 +363,6 @@ Any inquiries can be addressed to:
 	</Actions>
 
 	<Timers>
-		<Timer id="1">
-			<Name>Fast Timer (10s)</Name>
-			<Time initial="true">10000</Time>
-			<Interval>75</Interval>
-			<Content>
-			</Content>
-		</Timer>
-		<Timer id="2">
-			<Name>Medium Timer (1m)</Name>
-			<Time initial="true" dataDisplay="30000">60000</Time>
-			<Interval>75</Interval>
-			<Content>
-			</Content>
-		</Timer>
-		<Timer id="3">
-			<Name>Slow Timer (1h)</Name>
-			<Time initial="true">3600000</Time>
-			<Interval>75</Interval>
-			<Content>
-			</Content>
-		</Timer>
 	</Timers>
 
 	<PortSettings>
@@ -147,7 +378,7 @@ Any inquiries can be addressed to:
 							<MajorVersion id="0">
 								<MinorVersions>
 									<MinorVersion id="1">
-										<Date>2023-10-06</Date>
+										<Date>2023-10-07</Date>
 										<Provider>
 											<Author>Alex Silva</Author>
 											<Company>AxDevBR</Company>

@@ -8,12 +8,96 @@ namespace Skyline.DataMiner.Scripting
 {
 public static class Parameter
 {
+	/// <summary>PID: 30 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int updaterow_30 = 30;
+	/// <summary>PID: 30 | Type: read</summary>
+	public const int updaterow = 30;
+	/// <summary>PID: 35 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int updaterow_discreetlist_35 = 35;
+	/// <summary>PID: 35 | Type: read</summary>
+	public const int updaterow_discreetlist = 35;
+	/// <summary>PID: 1050 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int rowcount_1050 = 1050;
+	/// <summary>PID: 1050 | Type: read</summary>
+	public const int rowcount = 1050;
 	public class Write
 	{
+		/// <summary>PID: 20 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addrow_20 = 20;
+		/// <summary>PID: 20 | Type: write</summary>
+		public const int addrow = 20;
+		/// <summary>PID: 130 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int updaterow_130 = 130;
+		/// <summary>PID: 130 | Type: write</summary>
+		public const int updaterow = 130;
+	}
+	public class Simpletable
+	{
+		/// <summary>PID: 1000</summary>
+		public const int tablePid = 1000;
+		/// <summary>IDX: 0</summary>
+		public const int indexColumn = 0;
+		/// <summary>PID: 1001</summary>
+		public const int indexColumnPid = 1001;
+		public class Pid
+		{
+			/// <summary>PID: 1001 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int simpletableid_1001 = 1001;
+			/// <summary>PID: 1001 | Type: read</summary>
+			public const int simpletableid = 1001;
+			/// <summary>PID: 1002 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int simpletableadddate_1002 = 1002;
+			/// <summary>PID: 1002 | Type: read</summary>
+			public const int simpletableadddate = 1002;
+			/// <summary>PID: 1003 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int simpletableupdatedate_1003 = 1003;
+			/// <summary>PID: 1003 | Type: read</summary>
+			public const int simpletableupdatedate = 1003;
+			public class Write
+			{
+				/// <summary>PID: 1004 | Type: write</summary>
+				[EditorBrowsable(EditorBrowsableState.Never)]
+				public const int simpletabledeleterow_1004 = 1004;
+				/// <summary>PID: 1004 | Type: write</summary>
+				public const int simpletabledeleterow = 1004;
+			}
+		}
+		public class Idx
+		{
+			/// <summary>IDX: 0 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int simpletableid_1001 = 0;
+			/// <summary>IDX: 0 | Type: read</summary>
+			public const int simpletableid = 0;
+			/// <summary>IDX: 1 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int simpletableadddate_1002 = 1;
+			/// <summary>IDX: 1 | Type: read</summary>
+			public const int simpletableadddate = 1;
+			/// <summary>IDX: 2 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int simpletableupdatedate_1003 = 2;
+			/// <summary>IDX: 2 | Type: read</summary>
+			public const int simpletableupdatedate = 2;
+		}
 	}
 }
 public class WriteParameters
 {
+	/// <summary>PID: 20  | Type: write | DISCREETS: Add Row = 1</summary>
+	public System.Object Addrow {get { return Protocol.GetParameter(20); }set { Protocol.SetParameter(20, value); }}
+	/// <summary>PID: 130  | Type: write</summary>
+	public System.Object Updaterow {get { return Protocol.GetParameter(130); }set { Protocol.SetParameter(130, value); }}
+	/// <summary>PID: 1004  | Type: write | DISCREETS: Delete = 1</summary>
+	public System.Object Simpletabledeleterow {get { return Protocol.GetParameter(1004); }set { Protocol.SetParameter(1004, value); }}
 	public SLProtocolExt Protocol;
 	public WriteParameters(SLProtocolExt protocol)
 	{
@@ -22,17 +106,114 @@ public class WriteParameters
 }
 public interface SLProtocolExt : SLProtocol
 {
+	/// <summary>PID: 1000</summary>
+	SimpletableQActionTable simpletable { get; set; }
 	object Afterstartup_dummy { get; set; }
+	object Addrow_20 { get; set; }
+	object Addrow { get; set; }
+	object Updaterow_30 { get; set; }
+	object Updaterow { get; set; }
+	object Updaterow_discreetlist_35 { get; set; }
+	object Updaterow_discreetlist { get; set; }
+	object Updaterow_130 { get; set; }
+	object Simpletableid_1001 { get; set; }
+	object Simpletableid { get; set; }
+	object Simpletableadddate_1002 { get; set; }
+	object Simpletableadddate { get; set; }
+	object Simpletableupdatedate_1003 { get; set; }
+	object Simpletableupdatedate { get; set; }
+	object Simpletabledeleterow_1004 { get; set; }
+	object Simpletabledeleterow { get; set; }
+	object Rowcount_1050 { get; set; }
+	object Rowcount { get; set; }
 	WriteParameters Write { get; set; }
 }
 public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 {
+	/// <summary>PID: 1000</summary>
+	public SimpletableQActionTable simpletable { get; set; }
 	/// <summary>PID: 2  | Type: dummy</summary>
 	public System.Object Afterstartup_dummy {get { return GetParameter(2); }set { SetParameter(2, value); }}
+	/// <summary>PID: 20  | Type: write | DISCREETS: Add Row = 1</summary>
+	public System.Object Addrow_20 {get { return GetParameter(20); }set { SetParameter(20, value); }}
+	/// <summary>PID: 20  | Type: write | DISCREETS: Add Row = 1</summary>
+	public System.Object Addrow {get { return Write.Addrow; }set { Write.Addrow = value; }}
+	/// <summary>PID: 30  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Updaterow_30 {get { return GetParameter(30); }set { SetParameter(30, value); }}
+	/// <summary>PID: 30  | Type: read</summary>
+	public System.Object Updaterow {get { return GetParameter(30); }set { SetParameter(30, value); }}
+	/// <summary>PID: 35  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Updaterow_discreetlist_35 {get { return GetParameter(35); }set { SetParameter(35, value); }}
+	/// <summary>PID: 35  | Type: read</summary>
+	public System.Object Updaterow_discreetlist {get { return GetParameter(35); }set { SetParameter(35, value); }}
+	/// <summary>PID: 130  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Updaterow_130 {get { return GetParameter(130); }set { SetParameter(130, value); }}
+	/// <summary>PID: 1001  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Simpletableid_1001 {get { return GetParameter(1001); }set { SetParameter(1001, value); }}
+	/// <summary>PID: 1001  | Type: read</summary>
+	public System.Object Simpletableid {get { return GetParameter(1001); }set { SetParameter(1001, value); }}
+	/// <summary>PID: 1002  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Simpletableadddate_1002 {get { return GetParameter(1002); }set { SetParameter(1002, value); }}
+	/// <summary>PID: 1002  | Type: read</summary>
+	public System.Object Simpletableadddate {get { return GetParameter(1002); }set { SetParameter(1002, value); }}
+	/// <summary>PID: 1003  | Type: read | EXCEPTIONS: Not Updated = -1</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Simpletableupdatedate_1003 {get { return GetParameter(1003); }set { SetParameter(1003, value); }}
+	/// <summary>PID: 1003  | Type: read | EXCEPTIONS: Not Updated = -1</summary>
+	public System.Object Simpletableupdatedate {get { return GetParameter(1003); }set { SetParameter(1003, value); }}
+	/// <summary>PID: 1004  | Type: write | DISCREETS: Delete = 1</summary>
+	public System.Object Simpletabledeleterow_1004 {get { return GetParameter(1004); }set { SetParameter(1004, value); }}
+	/// <summary>PID: 1004  | Type: write | DISCREETS: Delete = 1</summary>
+	public System.Object Simpletabledeleterow {get { return Write.Simpletabledeleterow; }set { Write.Simpletabledeleterow = value; }}
+	/// <summary>PID: 1050  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Rowcount_1050 {get { return GetParameter(1050); }set { SetParameter(1050, value); }}
+	/// <summary>PID: 1050  | Type: read</summary>
+	public System.Object Rowcount {get { return GetParameter(1050); }set { SetParameter(1050, value); }}
 	public WriteParameters Write { get; set; }
 	public ConcreteSLProtocolExt()
 	{
+		simpletable = new SimpletableQActionTable(this, 1000, "simpletable");
 		Write = new WriteParameters(this);
 	}
+}
+/// <summary>IDX: 0</summary>
+public class SimpletableQActionTable : QActionTable, IEnumerable<SimpletableQActionRow>
+{
+	public SimpletableQActionTable(SLProtocol protocol, int tableId, string tableName) : base(protocol, tableId, tableName) { }
+	IEnumerator IEnumerable.GetEnumerator() { return (IEnumerator) GetEnumerator(); }
+	public IEnumerator<SimpletableQActionRow> GetEnumerator() { return new QActionTableEnumerator<SimpletableQActionRow>(this); }
+}
+/// <summary>IDX: 0</summary>
+public class SimpletableQActionRow : QActionTableRow
+{
+	/// <summary>PID: 1001 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Simpletableid_1001 { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 1001 | Type: read</summary>
+	public System.Object Simpletableid { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 1002 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Simpletableadddate_1002 { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 1002 | Type: read</summary>
+	public System.Object Simpletableadddate { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 1003 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Simpletableupdatedate_1003 { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 1003 | Type: read</summary>
+	public System.Object Simpletableupdatedate { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 1004 | Type: write</summary>
+	public System.Object Simpletabledeleterow_1004 { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 1004 | Type: write</summary>
+	public System.Object Simpletabledeleterow { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	public SimpletableQActionRow() : base(0, 4) { }
+	public SimpletableQActionRow(System.Object[] oRow) : base(0, 4, oRow) { }
+	public static implicit operator SimpletableQActionRow(System.Object[] source) { return new SimpletableQActionRow(source); }
+	public static implicit operator System.Object[](SimpletableQActionRow source) { return source.ToObjectArray(); }
 }
 }

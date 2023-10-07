@@ -1,9 +1,10 @@
 using System;
+
 using Skyline.DataMiner.Scripting;
 using Skyline.Protocol.SimpleTableExtension;
 
 /// <summary>
-/// DataMiner QAction Class: After Startup.
+/// DataMiner QAction Class: QActionName.
 /// </summary>
 public static class QAction
 {
@@ -15,12 +16,8 @@ public static class QAction
     {
         try
         {
-            // Initializes the table with the first row, if empty.
-            int rowsCount = protocol.RowCount(Parameter.Simpletable.tablePid);
-            if (rowsCount == 0)
-            {
-                SimpleTableCommon.AddRow(protocol);
-            }
+            protocol.DeleteRow(Parameter.Simpletable.tablePid, protocol.RowKey());
+            SimpleTableCommon.RefreshInfo(protocol);
         }
         catch (Exception ex)
         {
