@@ -39,7 +39,7 @@ namespace Skyline.Protocol
                 string[] tableKeys = protocol.GetKeys(Parameter.Simpletable.tablePid);
 
                 int[] ids = new int[] { Parameter.updaterow_discreetlist_35, Parameter.rowcount_1050 };
-                object[] values = new object[] { string.Join(",", tableKeys), tableKeys.Length };
+                object[] values = new object[] { string.Join(";", tableKeys), tableKeys.Length };
                 protocol.SetParameters(ids, values);
             }
         }
