@@ -109,6 +109,7 @@ Any inquiries can be addressed to:
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
+				<DefaultValue>Select a Row Key...</DefaultValue>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -125,7 +126,7 @@ Any inquiries can be addressed to:
 				<Discreets dependencyId="35" />
 			</Measurement>
 		</Param>
-		<Param id="130">
+		<Param id="130" setter="true">
 			<Name>UpdateRow</Name>
 			<Description>Update Row</Description>
 			<Type>write</Type>
@@ -157,7 +158,6 @@ Any inquiries can be addressed to:
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
-				<DefaultValue>Row Key...</DefaultValue>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -378,7 +378,7 @@ Any inquiries can be addressed to:
 							<MajorVersion id="0">
 								<MinorVersions>
 									<MinorVersion id="1">
-										<Date>2023-10-07</Date>
+										<Date>2023-10-09</Date>
 										<Provider>
 											<Author>Alex Silva</Author>
 											<Company>AxDevBR</Company>
